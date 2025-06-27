@@ -7,7 +7,7 @@ import RegisterPage from './pages/RegisterPage'
 import LoginPage from './pages/LoginPage'
 import WordBookSelectionPage from './pages/WordBookSelectionPage'
 import AppreciationPage from './pages/AppreciationPage'
-import { getUser } from './utils/auth'
+import { getUser, clearUser } from './utils/auth'
 
 function App() {
   const [authStatus, setAuthStatus] = useState('loading'); // loading, unauthenticated, needs_selection, authenticated
@@ -84,6 +84,15 @@ function App() {
     const user = await getUser();
     setUserData(user);
     setAuthStatus('needs_selection');
+  };
+
+  const handleLogout = async () => {
+    await clearUser();
+    setUserData(null);
+    setData(null);
+    setAuthStatus('unauthenticated');
+    setAuthPage('login'); // Default to login page
+    setPage('home'); // This will be caught by the auth guard and show login
   };
 
   const handleFinishAndReturnHome = () => {
@@ -183,6 +192,7 @@ function App() {
       onStartStudy={handleStartStudy}
       onChangeWordBook={() => setPage('wordbook_selection')}
       onDataRefresh={() => userData && fetchLearningData(userData.id)}
+      onLogout={handleLogout}
     />
   )
 }

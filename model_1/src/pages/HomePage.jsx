@@ -14,7 +14,7 @@ const wordbookMap = {
   9: '托福',
 }
 
-export default function HomePage({ data, loading, error, onStartStudy, onChangeWordBook, onDataRefresh }) {
+export default function HomePage({ data, loading, error, onStartStudy, onChangeWordBook, onDataRefresh, onLogout }) {
   const [isEditingGoal, setIsEditingGoal] = useState(false);
   const [isSubmittingGoal, setIsSubmittingGoal] = useState(false);
   const [goalError, setGoalError] = useState('');
@@ -101,6 +101,7 @@ export default function HomePage({ data, loading, error, onStartStudy, onChangeW
             <div className="home-links">
               <button className="btn-link" onClick={onChangeWordBook}>更换单词本</button>
               <button className="btn-link" onClick={() => setIsEditingGoal(true)}>更改每日目标</button>
+              <button className="btn-link" onClick={onLogout}>退出登录</button>
             </div>
             <button className="btn-main btn-main-long" onClick={onStartStudy}>开始学习</button>
           </div>

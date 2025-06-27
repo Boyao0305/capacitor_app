@@ -35,9 +35,9 @@ export default function RegisterPage({ onRegisterSuccess, onSwitchToLogin }) {
       const data = await response.json();
 
       // Save user credentials and ID
-      if (data.user_id) { // Assuming the key is user_id based on other files
+      if (data.id) {
         await saveUser({
-          id: data.user_id,
+          id: data.id,
           username,
           password, // Note: Storing plaintext passwords is not recommended for production.
         });
